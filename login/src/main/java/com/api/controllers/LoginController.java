@@ -43,15 +43,13 @@ public class LoginController {
 	}
     }
 
-    @PutMapping(value = "/login")
+    @PutMapping(value = "/altera")
     public ResponseEntity<String> alteraAcesso(@RequestBody String json) {
 	Gson gson = new Gson();
 	LoginModel usuario = gson.fromJson(json, LoginModel.class);
 	Optional<LoginModel> loginModelOptional = loginServ.alteraUsuario(usuario);
 	if (!loginModelOptional.isPresent()) {
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este usuário não existe!!!");
-	} else if (!loginModelOptional.get().getSenha().equals(usuario.getSenha())) {
-	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Senha está incorreta!!!");
 	} else {
 	    return ResponseEntity.status(HttpStatus.ACCEPTED).body(gson.toJson(loginModelOptional));
 	}

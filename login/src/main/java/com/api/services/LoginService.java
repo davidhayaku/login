@@ -31,14 +31,12 @@ public class LoginService {
 	return retorno;
     }
 
-    public Optional<LoginModel> alteraUsuario(Object object) {
-	Optional<LoginModel> retorno = null;
-	if (retorno.get().getPrimeiroAcesso().equals(1)) {
-	    LoginModel usuario = retorno.get();
-	    usuario.setPrimeiroAcesso(0);
-	    loginRepo.save(usuario);
-	}
-	return null;
+    public Optional<LoginModel> alteraUsuario(LoginModel usuario) {
+	Optional<LoginModel> retorno = loginRepo.findById(usuario.getId());
+	retorno.get().setPrimeiroAcesso(0);
+	loginRepo.save(retorno);
+
+	return retorno;
 
     }
 
