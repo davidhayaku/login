@@ -43,8 +43,6 @@ public class LoginController {
 	}
     }
 
-    // TESTE GIT
-
     @PutMapping(value = "/altera")
     public ResponseEntity<String> alteraAcesso(@RequestBody String json) {
 	Gson gson = new Gson();
